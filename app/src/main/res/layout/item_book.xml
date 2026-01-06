@@ -1,83 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardBook"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp">
 
-    <LinearLayout
-        android:id="@+id/layoutRoot"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="12dp">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        <!-- Book Cover -->
+        <!-- Book Cover Image -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bookCoverCard"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBookCover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/book_placeholder" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Favorite Button -->
         <ImageView
-            android:id="@+id/imgCover"
-            android:layout_width="64dp"
-            android:layout_height="96dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/book_placeholder" />
+            android:id="@+id/btnFavorite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_heart_filled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#EF4444" />
 
-        <!-- Text Container -->
-        <LinearLayout
-            android:id="@+id/layoutText"
+        <!-- Book Title -->
+        <TextView
+            android:id="@+id/tvBookTitle"
             android:layout_width="0dp"
-            android:layout_height="96dp"
-            android:layout_weight="1"
-            android:layout_marginStart="12dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Introduction to Algorithms"
+            android:textColor="#1F2937"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btnFavorite"
+            app:layout_constraintStart_toEndOf="@id/bookCoverCard"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Book Title -->
-            <TextView
-                android:id="@+id/txtTitle"
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:text="Book Title"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#0F172A"
-                android:maxLines="1"
-                android:ellipsize="end"/>
+        <!-- Author Name -->
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="Thomas H. Cormen"
+            android:textColor="#6B7280"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bookCoverCard"
+            app:layout_constraintTop_toBottomOf="@id/tvBookTitle" />
 
-            <!-- Author -->
-            <TextView
-                android:id="@+id/txtAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:text="Author Name"
-                android:textColor="#475569"
-                android:textSize="14sp"
-                android:maxLines="1"
-                android:ellipsize="end"/>
-
-            <!-- ISBN -->
-            <TextView
-                android:id="@+id/txtIsbn"
-                android:layout_width="match_parent"
-                android:layout_height="18dp"
-                android:layout_marginTop="4dp"
-                android:text="ISBN: 978-xxxxxxxxxx"
-                android:textSize="12sp"
-                android:textColor="#64748B"/>
-        </LinearLayout>
+        <!-- ISBN -->
+        <TextView
+            android:id="@+id/tvISBN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="ISBN: 9780262033848"
+            android:textColor="#9CA3AF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bookCoverCard"
+            app:layout_constraintTop_toBottomOf="@id/tvAuthor" />
 
         <!-- Status Badge -->
         <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="72dp"
-            android:layout_height="28dp"
-            android:gravity="center"
-            android:text="AVAILABLE"
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_status_available"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:text="Available"
+            android:textColor="#10B981"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="#2563EB"
-            android:background="@drawable/bg_status"/>
+            app:layout_constraintStart_toEndOf="@id/bookCoverCard"
+            app:layout_constraintTop_toBottomOf="@id/tvISBN" />
 
-    </LinearLayout>
+        <!-- Action Button -->
+        <Button
+            android:id="@+id/btnAction"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:backgroundTint="#3B82F6"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="Reserve"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvStatus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvStatus" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
