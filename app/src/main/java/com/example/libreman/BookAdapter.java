@@ -39,10 +39,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         BookViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.txtTitle);
-            author = itemView.findViewById(R.id.txtAuthor);
-            isbn = itemView.findViewById(R.id.txtIsbn);
-            status = itemView.findViewById(R.id.txtStatus);
+            title = itemView.findViewById(R.id.tvBookTitle);
+            author = itemView.findViewById(R.id.tvAuthor);
+            isbn = itemView.findViewById(R.id.tvISBN);
+            status = itemView.findViewById(R.id.tvStatus);
         }
     }
 }
