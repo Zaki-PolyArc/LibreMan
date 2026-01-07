@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Background -->
+    <color name="bg_light">#FFFFFF</color>
+
+    <!-- Primary -->
+    <color name="primary">#2563EB</color>
+    <color name="primary_light">#E0E7FF</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#0F172A</color>     <!-- you asked -->
+    <color name="text_secondary">#64748B</color>   <!-- you asked -->
+    <color name="text_hint">#94A3B8</color>
 
 </resources>
