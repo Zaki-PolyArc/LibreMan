@@ -4,19 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false">
 
-    <!-- Top App Bar -->
+    <!-- Back -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="16dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
+    <!-- Title -->
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
@@ -25,28 +28,31 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Notification -->
     <ImageButton
         android:id="@+id/btnNotification"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="16dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_notification"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <!-- Search Bar -->
+    <!-- Top Tabs -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/searchCard"
+        android:id="@+id/tabCard"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        android:backgroundTint="#E8EEF6"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -55,111 +61,127 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="12dp">
+            android:padding="6dp">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_search"/>
-
-            <EditText
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Search ISBN, Title, Author..."
-                android:background="@null"
+                android:text="All Books"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:paddingStart="12dp"/>
+                android:background="@drawable/bg_tab_selected"/>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_qr"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Available"
+                android:gravity="center"
+                android:textColor="@color/text_secondary"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Checked Out"
+                android:gravity="center"
+                android:textColor="@color/text_secondary"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Filter Chips -->
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+    <!-- Secondary Filters -->
+    <HorizontalScrollView
+        android:id="@+id/chipScroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        app:singleSelection="true"
-        app:chipSpacingHorizontal="8dp"
-        app:layout_constraintTop_toBottomOf="@id/searchCard"
+        android:layout_marginHorizontal="16dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/tabCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.chip.Chip
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="All Books"
-            android:checked="true"
-            style="@style/LibraryFilterChip"/>
+            app:singleLine="true"
+            app:chipSpacingHorizontal="8dp">
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Available"
-            style="@style/LibraryFilterChip"/>
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Textbooks"
+                style="@style/LibraryFilterChip"/>
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Checked Out"
-            style="@style/LibraryFilterChip"/>
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Journals"
+                style="@style/LibraryFilterChip"/>
 
-    </com.google.android.material.chip.ChipGroup>
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Arrivals"
+                style="@style/LibraryFilterChip"/>
 
-    <!-- Recently Added -->
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <!-- Section Title -->
     <TextView
-        android:id="@+id/txtRecent"
+        android:id="@+id/txtBrowse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RECENTLY ADDED"
-        android:textColor="@color/text_secondary"
-        android:textStyle="bold"
+        android:text="BROWSE COLLECTION"
         android:textSize="12sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/chipGroup"
+        android:textStyle="bold"
+        android:textColor="@color/text_secondary"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/chipScroll"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Book List -->
+    <!-- Grid -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerBooks"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/txtRecent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/txtBrowse"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Floating Scan Button -->
+    <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabScan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_scan"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
-
-    <!-- Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="12dp"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/menu_bottom_nav"
-        style="@style/BottomNavStyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Bottom Nav -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:itemPaddingBottom="10dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        app:itemIconSize="24dp"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bottom_nav"
+        app:itemActiveIndicatorStyle="@style/BottomNavIndicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
