@@ -136,10 +136,6 @@ public class AdminSignupActivity extends AppCompatActivity {
             etEmail.setError("Please enter a valid email");
             if (isValid) etEmail.requestFocus();
             isValid = false;
-        } else if (!email.endsWith(".edu")) {
-            etEmail.setError("Please use your university email (.edu)");
-            if (isValid) etEmail.requestFocus();
-            isValid = false;
         }
 
         // Validate password
@@ -171,7 +167,7 @@ public class AdminSignupActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
 
             // Navigate to dashboard
-            Intent intent = new Intent(AdminSignupActivity.this, BookDetailActivity.class);
+            Intent intent = new Intent(AdminSignupActivity.this, CatalogActivity.class);
             intent.putExtra("admin_name", fullName);
             intent.putExtra("admin_id", adminId);
             intent.putExtra("admin_email", email);

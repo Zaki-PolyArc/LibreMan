@@ -78,7 +78,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
         // Tab switching - Sign Up
         btnSignup.setOnClickListener(v -> {
-            Intent intent = new Intent(AdminLoginActivity.this, AdminSignUpActivity.class);
+            Intent intent = new Intent(AdminLoginActivity.this, AdminSignupActivity.class);
             startActivity(intent);
             finish();
         });
@@ -162,7 +162,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
 
                 // Navigate to dashboard
-                Intent intent = new Intent(AdminLoginActivity.this, BookDetailActivity.class);
+                Intent intent = new Intent(AdminLoginActivity.this, CatalogActivity.class);
                 intent.putExtra("admin_id", adminId);
                 intent.putExtra("admin_email", email);
 

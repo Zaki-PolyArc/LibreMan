@@ -12,34 +12,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibreMan">
 
-        <!-- LAUNCH CATALOG FOR TESTING -->
+        <!-- LAUNCH ROLE SELECT AS MAIN ENTRY POINT -->
         <activity
-            android:name=".CatalogActivity"
+            android:name=".RoleSelectActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+        <!-- ADMIN LOGIN -->
+        <activity
+            android:name=".AdminLoginActivity"
+            android:exported="true" />
+
+        <!-- ADMIN SIGNUP -->
+        <activity
+            android:name=".AdminSignupActivity"
+            android:exported="true" />
+
+        <!-- CATALOG -->
+        <activity
+            android:name=".CatalogActivity"
+            android:exported="true" />
 
         <!-- SEARCH -->
         <activity
             android:name=".BookSearchActivity"
             android:exported="true" />
 
-        <!-- MAIN ACTIVITY (DASHBOARD) — COMMENTED FOR NOW -->
+        <!-- BOOK DETAILS -->
+        <activity
+            android:name=".BookDetailActivity"
+            android:exported="true" />
+
+        <!-- MAIN ACTIVITY (DASHBOARD) – FOR FUTURE USE -->
         <!--
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
-        -->
-
-        <!-- BOOK DETAILS (FOR LATER) -->
-        <!--
-        <activity
-            android:name=".BookDetailActivity"
             android:exported="true" />
         -->
 
