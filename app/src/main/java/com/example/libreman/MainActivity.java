@@ -3,7 +3,7 @@ package com.example.libreman;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,7 +14,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_library_catalog);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerBooks);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new BookAdapter());
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        int spacingInPx = getResources().getDimensionPixelSize(R.dimen.grid_spacing);
+        recyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(2, spacingInPx, false)
+        );
+
+        recyclerView.setAdapter(new CatalogBookAdapter());
+
     }
 }

@@ -1,20 +1,47 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.LibreMan" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.LibreMan" parent="Theme.Material3.Light.NoActionBar" tools:targetApi="q">
+
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:colorBackground">@color/bg_light</item>
+        <item name="android:statusBarColor">@color/bg_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="materialCardViewStyle">@style/NoTintCard</item>
+        <item name="bottomNavigationStyle">@style/NoTintBottomNav</item>
+
     </style>
 
+    <style name="NoTintCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <style name="NoTintBottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+
+    <!-- App theme -->
     <style name="Theme.LibreMan" parent="Base.Theme.LibreMan" />
+
+    <!-- Bottom Navigation -->
     <style name="BottomNavStyle">
         <item name="itemIconTint">@color/bottom_nav_selector</item>
         <item name="itemTextColor">@color/bottom_nav_selector</item>
         <item name="labelVisibilityMode">labeled</item>
+        <item name="bottomNavigationStyle">@style/NoTintBottomNav</item>
     </style>
+    <style name="BottomNavIndicator">
+        <item name="android:color">@android:color/transparent</item>
+    </style>
+
+    <!-- Filter Chips -->
     <style name="LibraryFilterChip" parent="Widget.Material3.Chip.Assist">
         <item name="android:layout_height">36dp</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#0F172A</item>
+        <item name="android:textColor">@color/text_primary</item>
         <item name="chipCornerRadius">18dp</item>
         <item name="chipBackgroundColor">@color/chip_selector</item>
         <item name="chipStrokeColor">#CBD5E1</item>
