@@ -91,7 +91,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Secondary Filters -->
+    <!-- Filters -->
     <HorizontalScrollView
         android:id="@+id/chipScroll"
         android:layout_width="0dp"
@@ -108,31 +108,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:singleLine="true"
-            app:chipSpacingHorizontal="8dp">
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Textbooks"
-                style="@style/LibraryFilterChip"/>
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Journals"
-                style="@style/LibraryFilterChip"/>
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Arrivals"
-                style="@style/LibraryFilterChip"/>
-
-        </com.google.android.material.chip.ChipGroup>
+            app:chipSpacingHorizontal="8dp"/>
 
     </HorizontalScrollView>
 
-    <!-- Section Title -->
+    <!-- Section -->
     <TextView
         android:id="@+id/txtBrowse"
         android:layout_width="wrap_content"
@@ -152,7 +132,7 @@
         android:layout_height="0dp"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@id/txtBrowse"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -163,25 +143,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_scan"
         android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Bottom Nav -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        app:itemPaddingBottom="10dp"
-        android:background="#FFFFFF"
-        android:elevation="8dp"
-        app:itemIconSize="24dp"
-        app:itemIconTint="@color/bottom_nav_color"
-        app:itemTextColor="@color/bottom_nav_color"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottom_nav"
-        app:itemActiveIndicatorStyle="@style/BottomNavIndicator" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
