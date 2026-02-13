@@ -25,10 +25,9 @@ public class SearchFragment extends Fragment {
 
     private BookAdapter adapter;
     private TextView tvResultsFor, tvResultCount;
+    private EditText etSearch;
 
-    public SearchFragment() {
-        // Required empty constructor
-    }
+    public SearchFragment() { }
 
     @Nullable
     @Override
@@ -40,7 +39,7 @@ public class SearchFragment extends Fragment {
 
         // Views
         RecyclerView rvBooks = view.findViewById(R.id.rvBooks);
-        EditText etSearch = view.findViewById(R.id.etSearch);
+        etSearch = view.findViewById(R.id.etSearch);
         ImageView btnClear = view.findViewById(R.id.btnClear);
         ChipGroup chipGroup = view.findViewById(R.id.chipGroup);
         tvResultsFor = view.findViewById(R.id.tvResultsFor);
@@ -65,24 +64,37 @@ public class SearchFragment extends Fragment {
                 tvResultCount.setText(count + " found")
         );
 
-        // Chip selection logic
-        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        // FORCE default chip selection
+        chipGroup.post(() -> {
+            chipGroup.check(R.id.chipBookName);
+            adapter.searchType = BookAdapter.SearchType.BOOK;
+        });
+
+        // Chip selection listener
+        chipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
+
+            if (checkedIds.isEmpty()) return; // nothing selected
+
+            int checkedId = checkedIds.get(0);
 
             if (checkedId == R.id.chipAuthor) {
                 adapter.searchType = BookAdapter.SearchType.AUTHOR;
+
             } else if (checkedId == R.id.chipISBN) {
                 adapter.searchType = BookAdapter.SearchType.ISBN;
+
             } else {
                 adapter.searchType = BookAdapter.SearchType.BOOK;
             }
 
+            // Re-filter using current search text
             adapter.getFilter().filter(etSearch.getText().toString());
         });
 
         // Search input listener
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -92,13 +104,12 @@ public class SearchFragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) { }
         });
 
         // Clear button
         btnClear.setOnClickListener(v -> {
             etSearch.setText("");
-            updateResultsText("");
             adapter.getFilter().filter("");
         });
 

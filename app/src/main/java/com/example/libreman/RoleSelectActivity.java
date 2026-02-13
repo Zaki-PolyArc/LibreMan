@@ -6,8 +6,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.widget.TextView;
-
 public class RoleSelectActivity extends AppCompatActivity {
 
     @Override
@@ -15,18 +13,23 @@ public class RoleSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role_select);
 
-        CardView cardStudent = findViewById(R.id.cardStudent);
         CardView cardAdmin = findViewById(R.id.cardAdmin);
-        TextView tvGuest = findViewById(R.id.tvGuest);
+        CardView cardStudent = findViewById(R.id.cardStudent);
 
-        cardStudent.setOnClickListener(v -> openMain());
-        cardAdmin.setOnClickListener(v -> openMain());
-        tvGuest.setOnClickListener(v -> openMain());
-    }
+        // Admin click
+        cardAdmin.setOnClickListener(v -> {
+            Intent intent = new Intent(RoleSelectActivity.this, MainActivity.class);
+            intent.putExtra("ROLE", "ADMIN");
+            startActivity(intent);
+            finish();
+        });
 
-    private void openMain() {
-        startActivity(new Intent(this, MainActivity.class));
-        finish();   // important
-
+        // Student click (temporary same dashboard)
+        cardStudent.setOnClickListener(v -> {
+            Intent intent = new Intent(RoleSelectActivity.this, MainActivity.class);
+            intent.putExtra("ROLE", "STUDENT");
+            startActivity(intent);
+            finish();
+        });
     }
 }
