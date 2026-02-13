@@ -1,12 +1,13 @@
 package com.example.libreman;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -25,18 +26,36 @@ public class CatalogFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_catalog, container, false);
 
-        // RecyclerView setup
         RecyclerView recyclerView = view.findViewById(R.id.recyclerBooks);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        // Grid spacing
-        int spacing = (int) (16 * getResources().getDisplayMetrics().density);
-        recyclerView.addItemDecoration(
-                new GridSpacingItemDecoration(2, spacing, false)
-        );
+        CatalogBookAdapter adapter = new CatalogBookAdapter(getContext());
+        recyclerView.setAdapter(adapter);
 
-        recyclerView.setAdapter(new CatalogBookAdapter(getContext()));
+        // Tabs
+        TextView tabAll = view.findViewById(R.id.tabAll);
+        TextView tabAvailable = view.findViewById(R.id.tabAvailable);
+        TextView tabChecked = view.findViewById(R.id.tabChecked);
+
+        tabAll.setOnClickListener(v -> {
+            selectTab(tabAll, tabAvailable, tabChecked);
+            animateRecycler(recyclerView);
+            adapter.filter("ALL");
+        });
+
+        tabAvailable.setOnClickListener(v -> {
+            selectTab(tabAvailable, tabAll, tabChecked);
+            animateRecycler(recyclerView);
+            adapter.filter("AVAILABLE");
+        });
+
+        tabChecked.setOnClickListener(v -> {
+            selectTab(tabChecked, tabAll, tabAvailable);
+            animateRecycler(recyclerView);
+            adapter.filter("CHECKED_OUT");
+        });
+
 
         // Back button
         ImageButton btnBack = view.findViewById(R.id.btnBack);
@@ -46,7 +65,7 @@ public class CatalogFragment extends Fragment {
             }
         });
 
-        // Notification button (placeholder)
+        // Notification
         ImageButton btnNotification = view.findViewById(R.id.btnNotification);
         btnNotification.setOnClickListener(v ->
                 Toast.makeText(getContext(),
@@ -54,7 +73,7 @@ public class CatalogFragment extends Fragment {
                         Toast.LENGTH_SHORT).show()
         );
 
-        // FAB click
+        // FAB
         View fabScan = view.findViewById(R.id.fabScan);
         fabScan.setOnClickListener(v ->
                 Toast.makeText(getContext(),
@@ -64,4 +83,26 @@ public class CatalogFragment extends Fragment {
 
         return view;
     }
+
+    private void selectTab(TextView selected, TextView... others) {
+
+        selected.setSelected(true);
+        selected.setTextColor(getResources().getColor(R.color.text_primary));
+
+        for (TextView tv : others) {
+            tv.setSelected(false);
+            tv.setTextColor(getResources().getColor(R.color.text_secondary));
+        }
+    }
+
+    private void animateRecycler(RecyclerView recyclerView) {
+
+        recyclerView.setAlpha(0f);
+        recyclerView.animate()
+                .alpha(1f)
+                .setDuration(250)
+                .start();
+    }
+
+
 }

@@ -50,7 +50,7 @@
 
 
     <!-- Filter Chips -->
-    <style name="LibraryFilterChip" parent="Widget.Material3.Chip.Assist">
+    <style name="LibraryFilterChip" parent="Widget.Material3.Chip.Filter">
         <item name="android:layout_height">36dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_primary</item>
@@ -58,6 +58,7 @@
         <item name="chipBackgroundColor">@color/chip_selector</item>
         <item name="chipStrokeColor">#CBD5E1</item>
         <item name="chipStrokeWidth">1dp</item>
+        <item name="checkedIconVisible">false</item>
     </style>
 
 </resources>
