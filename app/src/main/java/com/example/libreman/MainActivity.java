@@ -2,6 +2,7 @@ package com.example.libreman;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
+    private String role = "STUDENT"; // default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,27 +21,41 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
-        // Load default fragment
+        // Get role
+        String receivedRole = getIntent().getStringExtra("ROLE");
+        if (receivedRole != null) role = receivedRole;
+
+        // Load correct dashboard
         if (savedInstanceState == null) {
-            loadFragment(new CatalogFragment());
-            bottomNavigation.setSelectedItemId(R.id.nav_catalog);
+            if (role.equals("ADMIN")) {
+                loadFragment(new AdminDashboardFragment());
+            } else {
+                loadFragment(new StudentDashboardFragment());
+            }
+            bottomNavigation.setSelectedItemId(R.id.nav_home);
         }
 
         bottomNavigation.setOnItemSelectedListener(item -> {
 
             int id = item.getItemId();
-
-            Fragment currentFragment =
+            Fragment current =
                     getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
 
-            // Prevent reloading same fragment
-            if (id == R.id.nav_catalog && currentFragment instanceof CatalogFragment) {
+            // Prevent reload of same fragment
+            if (id == R.id.nav_home) {
+                if (role.equals("ADMIN") && current instanceof AdminDashboardFragment) return true;
+                if (role.equals("STUDENT") && current instanceof StudentDashboardFragment) return true;
+
+                if (role.equals("ADMIN")) {
+                    loadFragment(new AdminDashboardFragment());
+                } else {
+                    loadFragment(new StudentDashboardFragment());
+                }
                 return true;
             }
 
-            if (id == R.id.nav_search && currentFragment instanceof SearchFragment) {
-                return true;
-            }
+            if (id == R.id.nav_catalog && current instanceof CatalogFragment) return true;
+            if (id == R.id.nav_search && current instanceof SearchFragment) return true;
 
             if (id == R.id.nav_catalog) {
                 loadFragment(new CatalogFragment());
@@ -61,21 +77,5 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
                 .commit();
-    }
-
-    // Proper back behavior
-    @Override
-    public void onBackPressed() {
-
-        Fragment currentFragment =
-                getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
-
-        // If not on Catalog, go to Catalog
-        if (!(currentFragment instanceof CatalogFragment)) {
-            bottomNavigation.setSelectedItemId(R.id.nav_catalog);
-            loadFragment(new CatalogFragment());
-        } else {
-            super.onBackPressed(); // exit app
-        }
     }
 }

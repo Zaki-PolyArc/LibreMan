@@ -22,7 +22,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private List<Book> filteredList;
     public SearchType searchType = SearchType.BOOK;
 
-    // 🔹 Callback for result count
+    // Result count callback
     public interface OnResultCountListener {
         void onResultCount(int count);
     }
@@ -49,10 +49,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = filteredList.get(position);
-        holder.title.setText(book.title);
-        holder.author.setText(book.author);
-        holder.isbn.setText("ISBN: " + book.isbn);
-        holder.status.setText(book.status);
+
+        holder.title.setText(book.getTitle());
+        holder.author.setText(book.getAuthor());
+        holder.isbn.setText("ISBN: " + book.getIsbn());
+        holder.status.setText(book.getStatus());
     }
 
     @Override
@@ -63,28 +64,33 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public Filter getFilter() {
         return new Filter() {
+
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
+
                 String query = constraint.toString().toLowerCase().trim();
                 List<Book> result = new ArrayList<>();
 
                 if (query.isEmpty()) {
                     result.addAll(originalList);
                 } else {
+
                     for (Book book : originalList) {
+
                         switch (searchType) {
+
                             case AUTHOR:
-                                if (book.author.toLowerCase().contains(query))
+                                if (book.getAuthor().toLowerCase().contains(query))
                                     result.add(book);
                                 break;
 
                             case ISBN:
-                                if (book.isbn.contains(query))
+                                if (book.getIsbn().contains(query))
                                     result.add(book);
                                 break;
 
                             case BOOK:
-                                if (book.title.toLowerCase().contains(query))
+                                if (book.getTitle().toLowerCase().contains(query))
                                     result.add(book);
                                 break;
                         }
@@ -109,6 +115,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     static class BookViewHolder extends RecyclerView.ViewHolder {
+
         TextView title, author, isbn, status;
 
         BookViewHolder(@NonNull View itemView) {

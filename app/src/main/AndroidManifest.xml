@@ -24,8 +24,7 @@
 
         </activity>
 
-        <!-- Main App Container -->
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"/>
 
         <!-- Detail screen (if used later) -->
         <activity android:name=".BookDetailActivity" />
