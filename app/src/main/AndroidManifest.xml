@@ -32,6 +32,16 @@
             android:name=".AdminSignupActivity"
             android:exported="true" />
 
+        <!-- ✅ STUDENT LOGIN -->
+        <activity
+            android:name=".StudentLoginActivity"
+            android:exported="true" />
+
+        <!-- ✅ STUDENT SIGNUP -->
+        <activity
+            android:name=".StudentSignupActivity"
+            android:exported="true" />
+
         <!-- CATALOG -->
         <activity
             android:name=".CatalogActivity"
@@ -46,13 +56,6 @@
         <activity
             android:name=".BookDetailActivity"
             android:exported="true" />
-
-        <!-- MAIN ACTIVITY (DASHBOARD) – FOR FUTURE USE -->
-        <!--
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        -->
 
     </application>
 

@@ -3,7 +3,6 @@ package com.example.libreman;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +10,6 @@ import androidx.cardview.widget.CardView;
 
 public class RoleSelectActivity extends AppCompatActivity {
 
-    // UI Components
     private CardView cardStudent;
     private CardView cardAdmin;
     private TextView tvGuest;
@@ -21,13 +19,9 @@ public class RoleSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role_select);
 
-        // Initialize views
         initializeViews();
-
-        // Set click listeners
         setClickListeners();
 
-        // Handle back press - Exit app on role select screen
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -43,20 +37,20 @@ public class RoleSelectActivity extends AppCompatActivity {
     }
 
     private void setClickListeners() {
-        // Student Card - Coming Soon
+
+        // ✅ Student Card - Navigate to Student Login
         cardStudent.setOnClickListener(v -> {
-            Toast.makeText(RoleSelectActivity.this,
-                    "Student portal coming soon!",
-                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(RoleSelectActivity.this, StudentLoginActivity.class);
+            startActivity(intent);
         });
 
-        // Admin Card - Navigate to Admin Login
+        // ✅ Admin Card - Navigate to Admin Login
         cardAdmin.setOnClickListener(v -> {
             Intent intent = new Intent(RoleSelectActivity.this, AdminLoginActivity.class);
             startActivity(intent);
         });
 
-        // Guest Link - Navigate to Catalog
+        // ✅ Guest Link - Navigate to Catalog
         tvGuest.setOnClickListener(v -> {
             Intent intent = new Intent(RoleSelectActivity.this, CatalogActivity.class);
             intent.putExtra("guest_mode", true);
