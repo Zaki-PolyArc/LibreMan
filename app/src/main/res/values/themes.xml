@@ -1,41 +1,53 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.LibreMan" parent="Theme.Material3.Light.NoActionBar" tools:targetApi="q">
 
+    <!-- Base Theme -->
+    <style name="Base.Theme.LibreMan"
+        parent="Theme.Material3.Light.NoActionBar"
+        tools:targetApi="q">
+
+        <!-- Disable dark mode -->
         <item name="android:forceDarkAllowed">false</item>
+        <!-- Background -->
         <item name="android:colorBackground">@color/bg_light</item>
         <item name="android:statusBarColor">@color/bg_light</item>
         <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Primary colors -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
 
+        <!-- Remove unwanted tints -->
         <item name="materialCardViewStyle">@style/NoTintCard</item>
         <item name="bottomNavigationStyle">@style/NoTintBottomNav</item>
 
     </style>
 
+
+    <!-- App Theme -->
+    <style name="Theme.LibreMan" parent="Base.Theme.LibreMan" />
+
+
+    <!-- CardView without tint -->
     <style name="NoTintCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/white</item>
         <item name="strokeWidth">0dp</item>
     </style>
 
+
+    <!-- Bottom Navigation without tint -->
     <style name="NoTintBottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="elevationOverlayEnabled">false</item>
         <item name="backgroundTint">@color/white</item>
-    </style>
-
-    <!-- App theme -->
-    <style name="Theme.LibreMan" parent="Base.Theme.LibreMan" />
-
-    <!-- Bottom Navigation -->
-    <style name="BottomNavStyle">
         <item name="itemIconTint">@color/bottom_nav_selector</item>
         <item name="itemTextColor">@color/bottom_nav_selector</item>
-        <item name="labelVisibilityMode">labeled</item>
-        <item name="bottomNavigationStyle">@style/NoTintBottomNav</item>
     </style>
+
+
+    <!-- Bottom Nav Indicator (remove highlight bubble) -->
     <style name="BottomNavIndicator">
         <item name="android:color">@android:color/transparent</item>
     </style>
+
 
     <!-- Filter Chips -->
     <style name="LibraryFilterChip" parent="Widget.Material3.Chip.Assist">

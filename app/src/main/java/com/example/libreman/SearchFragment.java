@@ -1,86 +1,71 @@
 package com.example.libreman;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookSearchActivity extends AppCompatActivity {
+public class SearchFragment extends Fragment {
 
     private BookAdapter adapter;
     private TextView tvResultsFor, tvResultCount;
 
+    public SearchFragment() {
+        // Required empty constructor
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_search);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        // -------------------- Views --------------------
-        RecyclerView rvBooks = findViewById(R.id.rvBooks);
-        EditText etSearch = findViewById(R.id.etSearch);
-        ImageView btnClear = findViewById(R.id.btnClear);
-        ChipGroup chipGroup = findViewById(R.id.chipGroup);
-        tvResultsFor = findViewById(R.id.tvResultsFor);
-        tvResultCount = findViewById(R.id.tvResultCount);
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        // -------------------- Bottom Navigation --------------------
-        bottomNav.setSelectedItemId(R.id.nav_search);
+        // Views
+        RecyclerView rvBooks = view.findViewById(R.id.rvBooks);
+        EditText etSearch = view.findViewById(R.id.etSearch);
+        ImageView btnClear = view.findViewById(R.id.btnClear);
+        ChipGroup chipGroup = view.findViewById(R.id.chipGroup);
+        tvResultsFor = view.findViewById(R.id.tvResultsFor);
+        tvResultCount = view.findViewById(R.id.tvResultCount);
 
-        bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-
-            if (id == R.id.nav_catalog) {
-                startActivity(new Intent(this, CatalogActivity.class));
-                overridePendingTransition(0, 0);
-                return true;
-            }
-
-            if (id == R.id.nav_search) {
-                return true; // already here
-            }
-
-            return false;
-        });
-
-        // -------------------- Initial UI State --------------------
-        btnClear.setVisibility(View.GONE);
-
-        // -------------------- Dummy Data --------------------
+        // Dummy Data
         List<Book> books = new ArrayList<>();
         books.add(new Book("Clean Code", "Robert C. Martin", "9780132350884", "AVAILABLE"));
         books.add(new Book("Effective Java", "Joshua Bloch", "9780134685991", "AVAILABLE"));
         books.add(new Book("Design Patterns", "Erich Gamma", "9780201633610", "ISSUED"));
 
-        // -------------------- RecyclerView --------------------
+        // Adapter
         adapter = new BookAdapter(books);
-        rvBooks.setLayoutManager(new LinearLayoutManager(this));
+        rvBooks.setLayoutManager(new LinearLayoutManager(getContext()));
         rvBooks.setAdapter(adapter);
 
-        // Initial result text
+        // Initial UI
         tvResultsFor.setText("All books");
         tvResultCount.setText(books.size() + " found");
 
-        // Listen for result count changes from adapter
         adapter.setOnResultCountListener(count ->
                 tvResultCount.setText(count + " found")
         );
 
-        // -------------------- Chip Selection --------------------
+        // Chip selection logic
         chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
 
             if (checkedId == R.id.chipAuthor) {
@@ -94,9 +79,10 @@ public class BookSearchActivity extends AppCompatActivity {
             adapter.getFilter().filter(etSearch.getText().toString());
         });
 
-        // -------------------- Search Input --------------------
+        // Search input listener
         etSearch.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -105,20 +91,22 @@ public class BookSearchActivity extends AppCompatActivity {
                 adapter.getFilter().filter(s.toString());
             }
 
-            @Override public void afterTextChanged(Editable s) {}
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
 
-        // -------------------- Clear Button --------------------
+        // Clear button
         btnClear.setOnClickListener(v -> {
             etSearch.setText("");
             updateResultsText("");
             adapter.getFilter().filter("");
         });
+
+        return view;
     }
 
-    // -------------------- Helper --------------------
     private void updateResultsText(String query) {
-        if (query.isEmpty()) {
+        if (query == null || query.isEmpty()) {
             tvResultsFor.setText("All books");
         } else {
             tvResultsFor.setText("Results for \"" + query + "\"");

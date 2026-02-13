@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibreMan">
 
-        <!-- LAUNCH CATALOG FOR TESTING -->
+        <!-- Launcher -->
         <activity
-            android:name=".CatalogActivity"
+            android:name=".RoleSelectActivity"
             android:exported="true">
 
             <intent-filter>
@@ -24,24 +24,11 @@
 
         </activity>
 
-        <!-- SEARCH -->
-        <activity
-            android:name=".BookSearchActivity"
-            android:exported="true" />
+        <!-- Main App Container -->
+        <activity android:name=".MainActivity" />
 
-        <!-- MAIN ACTIVITY (DASHBOARD) — COMMENTED FOR NOW -->
-        <!--
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        -->
-
-        <!-- BOOK DETAILS (FOR LATER) -->
-        <!--
-        <activity
-            android:name=".BookDetailActivity"
-            android:exported="true" />
-        -->
+        <!-- Detail screen (if used later) -->
+        <activity android:name=".BookDetailActivity" />
 
     </application>
 
