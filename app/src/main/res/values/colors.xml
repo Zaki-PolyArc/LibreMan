@@ -25,4 +25,7 @@
     <color name="button_secondary_stroke">#D1D5DB</color>
     <color name="bg_light">#FFFFFF</color>
     <color name="primary_light">#E0E7FF</color>
+    <color name="dark_gray">#757575</color>
+    <color name="light_gray">#E0E0E0</color>
+    <color name="red">#F44336</color>
 </resources>
