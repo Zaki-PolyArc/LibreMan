@@ -65,7 +65,7 @@ public class StudentLoginFragment extends Fragment {
 
         Toast.makeText(getContext(), "Student Login Successful", Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(getActivity(), CatalogActivity.class));
+        startActivity(new Intent(getActivity(), MainActivity.class));
         requireActivity().finish();
     }
 }

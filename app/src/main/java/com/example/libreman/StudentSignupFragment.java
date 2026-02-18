@@ -28,9 +28,9 @@ public class StudentSignupFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_student_signup, container, false);
 
         etFullName = view.findViewById(R.id.et_full_name);
-        etStudentId = view.findViewById(R.id.et_student_id);
-        etEmail = view.findViewById(R.id.et_email);
-        etPassword = view.findViewById(R.id.et_password);
+        etStudentId = view.findViewById(R.id.et_signup_student_id);
+        etEmail = view.findViewById(R.id.et_signup_student_email);
+        etPassword = view.findViewById(R.id.et_signup_password);
         btnCreateAccount = view.findViewById(R.id.btn_create_account);
         btnGuest = view.findViewById(R.id.btn_guest);
         tvLoginLink = view.findViewById(R.id.tv_login_link);
@@ -38,7 +38,7 @@ public class StudentSignupFragment extends Fragment {
         btnCreateAccount.setOnClickListener(v -> createAccount());
 
         btnGuest.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), CatalogActivity.class));
+            startActivity(new Intent(getActivity(), MainActivity.class));
             requireActivity().finish();
         });
 
@@ -78,7 +78,7 @@ public class StudentSignupFragment extends Fragment {
 
         Toast.makeText(getContext(), "Student Account Created", Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(getActivity(), CatalogActivity.class));
+        startActivity(new Intent(getActivity(), MainActivity.class));
         requireActivity().finish();
     }
 }

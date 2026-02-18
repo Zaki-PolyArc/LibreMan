@@ -36,7 +36,7 @@ public class RoleSelectActivity extends AppCompatActivity {
 
         // ✅ Guest → Catalog
         tvGuest.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CatalogActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("guest_mode", true);
             startActivity(intent);
         });

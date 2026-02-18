@@ -82,7 +82,7 @@ public class AdminSignupFragment extends Fragment {
 
         Toast.makeText(getContext(), "Admin Account Created", Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(getActivity(), CatalogActivity.class));
+        startActivity(new Intent(getActivity(), MainActivity.class));
         requireActivity().finish();
     }
 }
