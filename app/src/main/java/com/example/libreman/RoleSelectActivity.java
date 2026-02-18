@@ -19,42 +19,33 @@ public class RoleSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role_select);
 
-        initializeViews();
-        setClickListeners();
-
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                finishAffinity();
-            }
-        });
-    }
-
-    private void initializeViews() {
         cardStudent = findViewById(R.id.cardStudent);
         cardAdmin = findViewById(R.id.cardAdmin);
         tvGuest = findViewById(R.id.tvGuest);
-    }
 
-    private void setClickListeners() {
-
-        // ✅ Student Card - Navigate to Student Login
+        // ✅ Student → StudentAuthActivity
         cardStudent.setOnClickListener(v -> {
-            Intent intent = new Intent(RoleSelectActivity.this, StudentLoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, StudentAuthActivity.class));
         });
 
-        // ✅ Admin Card - Navigate to Admin Login
+        // ✅ Admin → AdminAuthActivity (UPDATED)
         cardAdmin.setOnClickListener(v -> {
-            Intent intent = new Intent(RoleSelectActivity.this, AdminLoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, AdminAuthActivity.class));
         });
 
-        // ✅ Guest Link - Navigate to Catalog
+        // ✅ Guest → Catalog
         tvGuest.setOnClickListener(v -> {
-            Intent intent = new Intent(RoleSelectActivity.this, CatalogActivity.class);
+            Intent intent = new Intent(this, CatalogActivity.class);
             intent.putExtra("guest_mode", true);
             startActivity(intent);
         });
+
+        getOnBackPressedDispatcher().addCallback(this,
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        finishAffinity();
+                    }
+                });
     }
 }

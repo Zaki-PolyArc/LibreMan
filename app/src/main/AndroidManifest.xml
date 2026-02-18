@@ -22,24 +22,15 @@
             </intent-filter>
         </activity>
 
-        <!-- ADMIN LOGIN -->
+        <!-- ADMIN AUTH (Login + Signup) -->
         <activity
-            android:name=".AdminLoginActivity"
+            android:name=".AdminAuthActivity"
             android:exported="true" />
 
-        <!-- ADMIN SIGNUP -->
-        <activity
-            android:name=".AdminSignupActivity"
-            android:exported="true" />
 
-        <!-- ✅ STUDENT LOGIN -->
+        <!-- ✅ STUDENT AUTH (Login + Signup in one screen) -->
         <activity
-            android:name=".StudentLoginActivity"
-            android:exported="true" />
-
-        <!-- ✅ STUDENT SIGNUP -->
-        <activity
-            android:name=".StudentSignupActivity"
+            android:name=".StudentAuthActivity"
             android:exported="true" />
 
         <!-- CATALOG -->
