@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibreMan">
 
+
         <!-- LAUNCH ROLE SELECT AS MAIN ENTRY POINT -->
+
         <activity
             android:name=".RoleSelectActivity"
             android:exported="true">
@@ -21,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <!-- ADMIN AUTH (Login + Signup) -->
         <activity
@@ -47,6 +50,7 @@
         <activity
             android:name=".BookDetailActivity"
             android:exported="true" />
+
 
     </application>
 

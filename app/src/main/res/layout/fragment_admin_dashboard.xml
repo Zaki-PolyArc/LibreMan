@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/bg_light">
+
+    <!-- Scroll container -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header -->
+            <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Library Admin"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_margin="16dp"/>
+
+            <!-- Stats -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:nestedScrollingEnabled="false"/>
+
+            <!-- Inventory Actions -->
+            <TextView
+                android:id="@+id/tvActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inventory Actions"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"/>
+
+            <!-- Actions Row -->
+            <LinearLayout
+                android:id="@+id/actionRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp"
+                android:gravity="center">
+
+                <include layout="@layout/item_action_button"/>
+                <include layout="@layout/item_action_button"/>
+                <include layout="@layout/item_action_button"/>
+            </LinearLayout>
+
+            <!-- Overdue -->
+            <TextView
+                android:id="@+id/tvOverdue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Overdue Returns"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginStart="16dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOverdue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:nestedScrollingEnabled="false"/>
+
+            <!-- Members -->
+            <TextView
+                android:id="@+id/tvMembers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Members"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginStart="16dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMembers"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_margin="16dp"
+                android:nestedScrollingEnabled="false"/>
+
+            <!-- bottom padding -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
