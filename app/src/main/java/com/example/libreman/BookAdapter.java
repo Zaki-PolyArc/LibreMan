@@ -3,6 +3,7 @@ package com.example.libreman;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -23,6 +24,18 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private final List<Book> originalList;
     private List<Book> filteredList;
     public SearchType searchType = SearchType.BOOK;
+    private String userRole = "GUEST";
+
+    // Borrow click callback
+    public interface OnBorrowClickListener {
+        void onBorrowClick(Book book);
+    }
+
+    private OnBorrowClickListener borrowClickListener;
+
+    public void setOnBorrowClickListener(OnBorrowClickListener listener) {
+        this.borrowClickListener = listener;
+    }
 
     // Result count callback
     public interface OnResultCountListener {
@@ -40,7 +53,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         this.filteredList = new ArrayList<>(books);
     }
 
-    // ✅ NEW METHOD — updates adapter with fresh data from Firebase
+    public void setUserRole(String role) {
+        this.userRole = role;
+        notifyDataSetChanged();
+    }
+
     public void updateList(List<Book> newBooks) {
         this.originalList.clear();
         this.originalList.addAll(newBooks);
@@ -65,6 +82,37 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.author.setText(book.getAuthor());
         holder.isbn.setText("ISBN: " + book.getIsbn());
         holder.status.setText(book.getStatus());
+
+        // Configure borrow button based on role
+        if ("STUDENT".equals(userRole)) {
+            holder.btnAction.setVisibility(View.VISIBLE);
+
+            if (book.getAvailableCopies() > 0) {
+                holder.btnAction.setText("Borrow");
+                holder.btnAction.setEnabled(true);
+                holder.btnAction.setBackgroundTintList(
+                        android.content.res.ColorStateList.valueOf(0xFF3B82F6));
+                holder.btnAction.setOnClickListener(v -> {
+                    if (borrowClickListener != null) {
+                        borrowClickListener.onBorrowClick(book);
+                    }
+                });
+            } else {
+                holder.btnAction.setText("Unavailable");
+                holder.btnAction.setEnabled(false);
+                holder.btnAction.setBackgroundTintList(
+                        android.content.res.ColorStateList.valueOf(0xFF9CA3AF));
+            }
+        } else if ("GUEST".equals(userRole)) {
+            holder.btnAction.setVisibility(View.VISIBLE);
+            holder.btnAction.setText("Login to Borrow");
+            holder.btnAction.setEnabled(false);
+            holder.btnAction.setBackgroundTintList(
+                    android.content.res.ColorStateList.valueOf(0xFF9CA3AF));
+        } else {
+            // ADMIN — no borrow button
+            holder.btnAction.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -75,31 +123,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public Filter getFilter() {
         return new Filter() {
-
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-
                 String query = constraint.toString().toLowerCase().trim();
                 List<Book> result = new ArrayList<>();
 
                 if (query.isEmpty()) {
                     result.addAll(originalList);
                 } else {
-
                     for (Book book : originalList) {
-
                         switch (searchType) {
-
                             case AUTHOR:
                                 if (book.getAuthor().toLowerCase().contains(query))
                                     result.add(book);
                                 break;
-
                             case ISBN:
                                 if (book.getIsbn().contains(query))
                                     result.add(book);
                                 break;
-
                             case BOOK:
                                 if (book.getTitle().toLowerCase().contains(query))
                                     result.add(book);
@@ -117,7 +158,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 filteredList = (List<Book>) results.values;
                 notifyDataSetChanged();
-
                 if (resultCountListener != null) {
                     resultCountListener.onResultCount(filteredList.size());
                 }
@@ -126,8 +166,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     static class BookViewHolder extends RecyclerView.ViewHolder {
-
         TextView title, author, isbn, status;
+        Button btnAction;
 
         BookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -135,10 +175,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             author = itemView.findViewById(R.id.tvAuthor);
             isbn = itemView.findViewById(R.id.tvISBN);
             status = itemView.findViewById(R.id.tvStatus);
+            btnAction = itemView.findViewById(R.id.btnAction);
         }
     }
 }
-
 //package com.example.libreman;
 //
 //import android.view.LayoutInflater;
@@ -179,6 +219,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 //    public BookAdapter(List<Book> books) {
 //        this.originalList = books;
 //        this.filteredList = new ArrayList<>(books);
+//    }
+//
+//    // ✅ NEW METHOD — updates adapter with fresh data from Firebase
+//    public void updateList(List<Book> newBooks) {
+//        this.originalList.clear();
+//        this.originalList.addAll(newBooks);
+//        this.filteredList.clear();
+//        this.filteredList.addAll(newBooks);
+//        notifyDataSetChanged();
 //    }
 //
 //    @NonNull
@@ -269,7 +318,139 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 //            status = itemView.findViewById(R.id.tvStatus);
 //        }
 //    }
-//
-//
-//
 //}
+//
+////package com.example.libreman;
+////
+////import android.view.LayoutInflater;
+////import android.view.View;
+////import android.view.ViewGroup;
+////import android.widget.Filter;
+////import android.widget.Filterable;
+////import android.widget.TextView;
+////
+////import androidx.annotation.NonNull;
+////import androidx.recyclerview.widget.RecyclerView;
+////
+////import com.example.libreman.model.Book;
+////
+////import java.util.ArrayList;
+////import java.util.List;
+////
+////public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>
+////        implements Filterable {
+////
+////    public enum SearchType { BOOK, AUTHOR, ISBN }
+////
+////    private final List<Book> originalList;
+////    private List<Book> filteredList;
+////    public SearchType searchType = SearchType.BOOK;
+////
+////    // Result count callback
+////    public interface OnResultCountListener {
+////        void onResultCount(int count);
+////    }
+////
+////    private OnResultCountListener resultCountListener;
+////
+////    public void setOnResultCountListener(OnResultCountListener listener) {
+////        this.resultCountListener = listener;
+////    }
+////
+////    public BookAdapter(List<Book> books) {
+////        this.originalList = books;
+////        this.filteredList = new ArrayList<>(books);
+////    }
+////
+////    @NonNull
+////    @Override
+////    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+////        View view = LayoutInflater.from(parent.getContext())
+////                .inflate(R.layout.item_book, parent, false);
+////        return new BookViewHolder(view);
+////    }
+////
+////    @Override
+////    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+////        Book book = filteredList.get(position);
+////
+////        holder.title.setText(book.getTitle());
+////        holder.author.setText(book.getAuthor());
+////        holder.isbn.setText("ISBN: " + book.getIsbn());
+////        holder.status.setText(book.getStatus());
+////    }
+////
+////    @Override
+////    public int getItemCount() {
+////        return filteredList.size();
+////    }
+////
+////    @Override
+////    public Filter getFilter() {
+////        return new Filter() {
+////
+////            @Override
+////            protected FilterResults performFiltering(CharSequence constraint) {
+////
+////                String query = constraint.toString().toLowerCase().trim();
+////                List<Book> result = new ArrayList<>();
+////
+////                if (query.isEmpty()) {
+////                    result.addAll(originalList);
+////                } else {
+////
+////                    for (Book book : originalList) {
+////
+////                        switch (searchType) {
+////
+////                            case AUTHOR:
+////                                if (book.getAuthor().toLowerCase().contains(query))
+////                                    result.add(book);
+////                                break;
+////
+////                            case ISBN:
+////                                if (book.getIsbn().contains(query))
+////                                    result.add(book);
+////                                break;
+////
+////                            case BOOK:
+////                                if (book.getTitle().toLowerCase().contains(query))
+////                                    result.add(book);
+////                                break;
+////                        }
+////                    }
+////                }
+////
+////                FilterResults results = new FilterResults();
+////                results.values = result;
+////                return results;
+////            }
+////
+////            @Override
+////            protected void publishResults(CharSequence constraint, FilterResults results) {
+////                filteredList = (List<Book>) results.values;
+////                notifyDataSetChanged();
+////
+////                if (resultCountListener != null) {
+////                    resultCountListener.onResultCount(filteredList.size());
+////                }
+////            }
+////        };
+////    }
+////
+////    static class BookViewHolder extends RecyclerView.ViewHolder {
+////
+////        TextView title, author, isbn, status;
+////
+////        BookViewHolder(@NonNull View itemView) {
+////            super(itemView);
+////            title = itemView.findViewById(R.id.tvBookTitle);
+////            author = itemView.findViewById(R.id.tvAuthor);
+////            isbn = itemView.findViewById(R.id.tvISBN);
+////            status = itemView.findViewById(R.id.tvStatus);
+////        }
+////    }
+////
+////
+////
+////}

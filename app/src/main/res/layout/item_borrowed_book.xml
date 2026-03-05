@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <!-- Book Title -->
+        <TextView
+            android:id="@+id/tvBorrowedTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clean Code"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#1F2937" />
+
+        <!-- Borrow Date -->
+        <TextView
+            android:id="@+id/tvBorrowDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Borrowed: Mar 01, 2026"
+            android:textSize="13sp"
+            android:textColor="#6B7280" />
+
+        <!-- Due Date -->
+        <TextView
+            android:id="@+id/tvDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Due: Mar 15, 2026"
+            android:textSize="13sp"
+            android:textColor="#6B7280" />
+
+        <!-- Fine Status -->
+        <TextView
+            android:id="@+id/tvFineStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="On Time"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#10B981" />
+
+        <!-- Return Button -->
+        <Button
+            android:id="@+id/btnReturn"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#3B82F6"
+            android:text="Return Book"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:cornerRadius="20dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
