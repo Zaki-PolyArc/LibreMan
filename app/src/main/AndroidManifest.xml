@@ -14,22 +14,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibreMan">
 
-        <!-- Launcher -->
+
+        <!-- LAUNCH ROLE SELECT AS MAIN ENTRY POINT -->
+
         <activity
             android:name=".RoleSelectActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <activity android:name=".MainActivity"/>
 
-        <!-- Detail screen (if used later) -->
-        <activity android:name=".BookDetailActivity" />
+        <!-- ADMIN AUTH (Login + Signup) -->
+        <activity
+            android:name=".AdminAuthActivity"
+            android:exported="true" />
+
+
+        <!-- ✅ STUDENT AUTH (Login + Signup in one screen) -->
+        <activity
+            android:name=".StudentAuthActivity"
+            android:exported="true" />
+
+        <!-- CATALOG -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
+        <!-- SEARCH -->
+<!--        <activity-->
+<!--            android:name=".BookSearchActivity"-->
+<!--            android:exported="true" />-->
+
+        <!-- BOOK DETAILS -->
+        <activity
+            android:name=".BookDetailActivity"
+            android:exported="true" />
+
 
     </application>
 

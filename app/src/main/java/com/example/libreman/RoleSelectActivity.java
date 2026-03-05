@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -11,14 +14,25 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RoleSelectActivity extends AppCompatActivity {
 
+    private CardView cardStudent;
+    private CardView cardAdmin;
+    private TextView tvGuest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role_select);
 
-        CardView cardAdmin = findViewById(R.id.cardAdmin);
-        CardView cardStudent = findViewById(R.id.cardStudent);
+        cardStudent = findViewById(R.id.cardStudent);
+        cardAdmin = findViewById(R.id.cardAdmin);
+        tvGuest = findViewById(R.id.tvGuest);
 
+        // ✅ Student → StudentAuthActivity
+        cardStudent.setOnClickListener(v -> {
+            startActivity(new Intent(this, StudentAuthActivity.class));
+        });
+
+        // ✅ Admin → AdminAuthActivity (UPDATED)
         // Add this at the top of onCreate() in YOUR LAUNCHER ACTIVITY
         FirebaseDatabase database = FirebaseDatabase
                 .getInstance("https://libreman-f9839-default-rtdb.asia-southeast1.firebasedatabase.app/");
@@ -32,18 +46,22 @@ public class RoleSelectActivity extends AppCompatActivity {
 
         // Admin click
         cardAdmin.setOnClickListener(v -> {
-            Intent intent = new Intent(RoleSelectActivity.this, MainActivity.class);
-            intent.putExtra("ROLE", "ADMIN");
-            startActivity(intent);
-            finish();
+            startActivity(new Intent(this, AdminAuthActivity.class));
         });
 
-        // Student click (temporary same dashboard)
-        cardStudent.setOnClickListener(v -> {
-            Intent intent = new Intent(RoleSelectActivity.this, MainActivity.class);
-            intent.putExtra("ROLE", "STUDENT");
+        // ✅ Guest → Catalog
+        tvGuest.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("guest_mode", true);
             startActivity(intent);
-            finish();
         });
+
+        getOnBackPressedDispatcher().addCallback(this,
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        finishAffinity();
+                    }
+                });
     }
 }
