@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "221648049394",
+    "project_id": "libreman-f9839",
+    "storage_bucket": "libreman-f9839.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221648049394:android:a6f80983787689385bac6b",
+        "android_client_info": {
+          "package_name": "com.example.libreman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDNN5TIUnaVRS2YXhiLDJcpJnU31ma6uI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.libreman.model.Book;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +25,6 @@ public class CatalogBookAdapter extends RecyclerView.Adapter<CatalogBookAdapter.
     public CatalogBookAdapter(Context context) {
         this.context = context;
 
-        // Dummy Data
-        fullList.add(new Book("Clean Code", "Robert C. Martin", "9780132350884", "AVAILABLE"));
-        fullList.add(new Book("Effective Java", "Joshua Bloch", "9780134685991", "AVAILABLE"));
-        fullList.add(new Book("Design Patterns", "Erich Gamma", "9780201633610", "CHECKED_OUT"));
-        fullList.add(new Book("Refactoring", "Martin Fowler", "9780201485677", "CHECKED_OUT"));
-        fullList.add(new Book("Android Dev", "Google", "9781111111111", "AVAILABLE"));
-        fullList.add(new Book("Java Basics", "James Gosling", "9782222222222", "AVAILABLE"));
 
         displayList.addAll(fullList);
     }

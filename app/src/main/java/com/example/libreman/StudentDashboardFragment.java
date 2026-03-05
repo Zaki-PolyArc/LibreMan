@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.libreman.model.Book;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +46,11 @@ public class StudentDashboardFragment extends Fragment {
         );
 
         // Dummy Books
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("Clean Code", "Robert Martin", "123", "ISSUED"));
-        books.add(new Book("Atomic Habits", "James Clear", "456", "ISSUED"));
-
-        rvReads.setAdapter(new CurrentReadsAdapter(books));
+//        List<Book> books = new ArrayList<>();
+//        books.add(new Book("Clean Code", "Robert Martin", "123", "ISSUED"));
+//        books.add(new Book("Atomic Habits", "James Clear", "456", "ISSUED"));
+//
+//        rvReads.setAdapter(new CurrentReadsAdapter(books));
 
         // Dummy Alerts
         List<String> alerts = new ArrayList<>();
