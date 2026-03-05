@@ -3,33 +3,50 @@ package com.example.libreman;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 public class RoleSelectActivity extends AppCompatActivity {
+
+    private CardView cardStudent;
+    private CardView cardAdmin;
+    private TextView tvGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role_select);
 
-        CardView cardAdmin = findViewById(R.id.cardAdmin);
-        CardView cardStudent = findViewById(R.id.cardStudent);
+        cardStudent = findViewById(R.id.cardStudent);
+        cardAdmin = findViewById(R.id.cardAdmin);
+        tvGuest = findViewById(R.id.tvGuest);
 
-        // Admin click
-        cardAdmin.setOnClickListener(v -> {
-            Intent intent = new Intent(RoleSelectActivity.this, MainActivity.class);
-            intent.putExtra("ROLE", "ADMIN");
-            startActivity(intent);
-            finish();
-        });
-
-        // Student click (temporary same dashboard)
+        // ✅ Student → StudentAuthActivity
         cardStudent.setOnClickListener(v -> {
-            Intent intent = new Intent(RoleSelectActivity.this, MainActivity.class);
-            intent.putExtra("ROLE", "STUDENT");
-            startActivity(intent);
-            finish();
+            startActivity(new Intent(this, StudentAuthActivity.class));
         });
+
+        // ✅ Admin → AdminAuthActivity (UPDATED)
+        cardAdmin.setOnClickListener(v -> {
+            startActivity(new Intent(this, AdminAuthActivity.class));
+        });
+
+        // ✅ Guest → Catalog
+        tvGuest.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("guest_mode", true);
+            startActivity(intent);
+        });
+
+        getOnBackPressedDispatcher().addCallback(this,
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        finishAffinity();
+                    }
+                });
     }
 }
