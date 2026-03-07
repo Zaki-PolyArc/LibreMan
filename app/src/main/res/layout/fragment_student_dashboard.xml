@@ -56,6 +56,7 @@
         </androidx.cardview.widget.CardView>
 
         <!-- Stats -->
+        <!-- Stats -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,9 +64,97 @@
             android:orientation="horizontal"
             android:weightSum="3">
 
-            <include layout="@layout/item_student_stat"/>
-            <include layout="@layout/item_student_stat"/>
-            <include layout="@layout/item_student_stat"/>
+            <!-- Stat 1: Borrowed -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvBorrowedCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Borrowed"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Stat 2: Overdue -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvOverdueCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#EF4444"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Overdue"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Stat 3: Fines -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvFineAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rs.0"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#EF4444"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fines"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
@@ -82,7 +171,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCurrentReads"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
 
         <!-- Alerts -->
