@@ -347,7 +347,7 @@
                             android:id="@+id/lockIcon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_lock"
+                            android:src="@drawable/ic_locky"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"

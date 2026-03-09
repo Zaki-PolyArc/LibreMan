@@ -139,7 +139,7 @@
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxStrokeColor="@color/input_stroke_color"
         app:boxStrokeWidth="1dp"
-        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconDrawable="@drawable/ic_locky"
         app:startIconTint="@color/gray_400"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/gray_400"

@@ -2,6 +2,7 @@ package com.example.libreman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.libreman.firebase.LibraryRepository;
+import com.example.libreman.model.Book;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RoleSelectActivity extends AppCompatActivity {
