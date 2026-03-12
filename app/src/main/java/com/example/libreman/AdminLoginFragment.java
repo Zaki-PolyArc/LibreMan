@@ -67,7 +67,11 @@ public class AdminLoginFragment extends Fragment {
 
         Toast.makeText(getContext(), "Admin Login Successful", Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(getActivity(), MainActivity.class));
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("ROLE", "ADMIN");           // ← THIS WAS MISSING
+        intent.putExtra("MEMBER_ID", id);            // ← admin ID
+        intent.putExtra("MEMBER_NAME", "Admin");     // ← display name
+        startActivity(intent);
         requireActivity().finish();
     }
 }

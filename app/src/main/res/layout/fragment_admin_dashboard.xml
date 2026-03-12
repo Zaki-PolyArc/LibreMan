@@ -86,6 +86,24 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:nestedScrollingEnabled="false"/>
+            <!-- Active Borrows -->
+            <TextView
+                android:id="@+id/tvActiveBorrows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active Borrows"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvActiveBorrows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:nestedScrollingEnabled="false"/>
 
             <!-- Members -->
             <TextView
